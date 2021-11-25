@@ -1,4 +1,5 @@
-# CryptoArtSaleWeb
+# CryptoArtSaleWeb - Ciro Della Volpe
+Projeto incremental para a disciplina de Desenvolvimento Web com Java 💻 ☕
 
 - Para executar o projeto, execute o arquivo CryptoartsalewebApplication.java
 - O banco irá ser auto-criado, então não precisa se preocupar.
