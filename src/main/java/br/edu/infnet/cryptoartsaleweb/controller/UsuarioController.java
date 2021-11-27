@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import br.edu.infnet.cryptoartsaleweb.model.domain.Usuario;
 import br.edu.infnet.cryptoartsaleweb.service.UsuarioService;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class UsuarioController {
@@ -21,8 +22,14 @@ public class UsuarioController {
     }
     
     @GetMapping(value = "/usuario/list")
-    public String telaLista() {
-        return "usuario/list";
+    public String telaLista(Model model, HttpSession session) {
+        if(session.getAttribute("user") != null) {
+            model.addAttribute("listaUsuarios", usuarioService.obterLista());
+
+            return "usuario/list";
+        }
+        
+        return "redirect:/login";
     }
 
     @PostMapping(value = "/usuario")

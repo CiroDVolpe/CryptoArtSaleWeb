@@ -9,18 +9,7 @@
 </head>
 <body>
     <c:import url="/WEB-INF/jsp/headers/autenticado.jsp"/>
-    
-    <c:if test="${not empty nomeCriado}">
-        <div class="alert alert-info">
-            ${nomeCriado} cadastrado com sucesso!
-        </div>
-    </c:if>
-    
-    <c:if test="${not empty nomeExcluido}">
-        <div class="alert alert-info">
-            ${nomeExcluido} excluido com sucesso!
-        </div>
-    </c:if>
+    <c:import url="/WEB-INF/jsp/alertas/criadoExcluido.jsp"/>
     
     <div class="row justify-content-md-center">
         <div class="col-md-8">

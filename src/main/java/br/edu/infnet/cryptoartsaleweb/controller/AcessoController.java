@@ -22,8 +22,13 @@ public class AcessoController {
     private UsuarioService usuarioService;
 
     @GetMapping(value = "/login")
-    public String telaLogin() {
+    public String telaLogin(Model model) {
         return "login";
+    }
+    
+    @GetMapping(value = "/password_recovery")
+    public String telaSenha() {
+        return "usuario/password_recovery";
     }
     
     @GetMapping(value = "/")
@@ -48,6 +53,21 @@ public class AcessoController {
             model.addAttribute("msg", email + ", Autenticação falhou, tente novamente.");
 
             return "login";
+        }
+    }
+    
+    @PostMapping(value = "/password_recovery")
+    public String telaSenha(Model model, HttpSession session, Usuario usuario) {
+        Usuario novoUsuario = usuarioService.alterarSenha(usuario);
+        
+        if(novoUsuario != null) {
+            model.addAttribute("msg", "Sua senha foi alterada, faça seu login.");
+
+            return telaLogin(model);
+        } else {
+            model.addAttribute("msg", "Nome e email não condizentes.");
+
+            return "usuario/password_recovery";
         }
     }
     

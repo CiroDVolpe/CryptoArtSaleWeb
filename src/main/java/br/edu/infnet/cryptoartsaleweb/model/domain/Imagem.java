@@ -1,10 +1,17 @@
 package br.edu.infnet.cryptoartsaleweb.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "id")
 public class Imagem extends CryptoArte {
     
     private static String[] formatosValidos = {"jpeg", "svg", "pdf"};
     private String corPredominante;
     private boolean somenteDigital;
+    
+    public Imagem() {}
 
     public Imagem(String formato, float tamanho, String nome, String nomeArtista, String corPredominante, boolean somenteDigital) throws Exception{
         super(formatosValidos, formato, tamanho, nome, nomeArtista);
@@ -28,11 +35,11 @@ public class Imagem extends CryptoArte {
         this.somenteDigital = somenteDigital;
     }
 
-    private String getCorPredominante() {
+    public String getCorPredominante() {
         return this.corPredominante;
     }
 
-    private boolean getSomenteDigital() {
+    public boolean getSomenteDigital() {
         return this.somenteDigital;
     }
 

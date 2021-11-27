@@ -1,20 +1,41 @@
 package br.edu.infnet.cryptoartsaleweb.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Leilao {
-    private int id;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @ManyToOne
+    @JoinColumn(name = "responsavel_id", referencedColumnName = "id")
     private Funcionario responsavel;
+    @OneToOne
+    @JoinColumn(name = "crypto_arte_id", referencedColumnName = "id")
     private CryptoArte cryptoArte;
+    @OneToOne
+    @JoinColumn(name = "ganhador_id", referencedColumnName = "id")
     private Cliente ganhador;
+    // ManyToMany Participantes
     private float valorAtual;
 
-    public Leilao(int id, Funcionario responsavel, CryptoArte cryptoArte) {
+    public Leilao(){}
+    
+    public Leilao(Funcionario responsavel, CryptoArte cryptoArte) {
         setId(id);
         setResponsavel(responsavel);
         setCryptoArte(cryptoArte);
         setValorAtual(0);
     }
 
-    public Leilao(int id, Funcionario responsavel, CryptoArte cryptoArte, Cliente ganhador, float valorAtual) {
+    public Leilao(Funcionario responsavel, CryptoArte cryptoArte, Cliente ganhador, float valorAtual) {
         setId(id);
         setResponsavel(responsavel);
         setCryptoArte(cryptoArte);
@@ -22,7 +43,7 @@ public class Leilao {
         setValorAtual(valorAtual);
     }
 
-    private void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,7 +63,7 @@ public class Leilao {
         this.valorAtual = valorAtual;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 

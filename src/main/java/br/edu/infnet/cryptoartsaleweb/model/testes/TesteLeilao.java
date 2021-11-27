@@ -19,10 +19,10 @@ public class TesteLeilao {
         System.out.println("\nTeste de criação de leilão com sucesso");
         
         try{
-            Funcionario funcionario = new Funcionario(1, "Funfun", "teste@falso.com", "13988504938", Date.from(Instant.parse("1996-12-04T00:00:00.000Z")), 123);
+            Funcionario funcionario = new Funcionario("Funfun", "teste@falso.com", "13988504938", "2020-11-12", 123);
             Audio audio = new Audio("mp3", 324, "vinheta", "Jacaré", "C#", "Meme");
             
-            Leilao leilao = new Leilao(1, funcionario, audio);
+            Leilao leilao = new Leilao(funcionario, audio);
             System.out.println(leilao);
         } catch(Exception e) {
             System.out.println("FALHA! ERRO LANÇADO: " + e.getMessage());
@@ -33,11 +33,11 @@ public class TesteLeilao {
         System.out.println("\nTeste de criação de leilão com sucesso");
         
         try{
-            Funcionario funcionario = new Funcionario(1, "Funfun", "teste@falso.com", "13988504938", Date.from(Instant.parse("1996-12-04T00:00:00.000Z")), 123);
+            Funcionario funcionario = new Funcionario("Funfun", "teste@falso.com", "13988504938", "2020-11-12", 123);
             Audio audio = new Audio("mp3", 324, "vinheta", "Jacaré", "C#", "Meme");
-            Cliente cliente = new Cliente(2, "Clienter", "teste@falso.com", "13988504938", Date.from(Instant.parse("1996-12-04T00:00:00.000Z")));
+            Cliente cliente = new Cliente("Clienter", "teste@falso.com", "13988504938", "2020-11-12");
             
-            Leilao leilao = new Leilao(2, funcionario, audio, cliente, 123);
+            Leilao leilao = new Leilao(funcionario, audio, cliente, 123);
             System.out.println(leilao);
         } catch(Exception e) {
             System.out.println("FALHA! ERRO LANÇADO: " + e.getMessage());

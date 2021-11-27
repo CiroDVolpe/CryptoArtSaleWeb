@@ -1,11 +1,18 @@
 package br.edu.infnet.cryptoartsaleweb.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "id")
 public class Video extends CryptoArte {
 
     private static String[] formatosValidos = {"avi", "mp4", "mov"};
     private String duracao;
     private String cameraUsada;
     private int fps;
+    
+    public Video() {}
 
     public Video(String formato, float tamanho, String nome, String nomeArtista, String duracao, String cameraUsada, int fps) throws Exception{
         super(formatosValidos, formato, tamanho, nome, nomeArtista);
@@ -35,15 +42,15 @@ public class Video extends CryptoArte {
         this.fps = fps;
     }
 
-    private String getDuracao() {
+    public String getDuracao() {
         return this.duracao;
     }
 
-    private String getCameraUsada() {
+    public String getCameraUsada() {
         return this.cameraUsada;
     }
 
-    private int getFps() {
+    public int getFps() {
         return this.fps;
     }
 

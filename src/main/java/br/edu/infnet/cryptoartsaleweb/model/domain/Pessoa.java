@@ -5,29 +5,40 @@ import br.edu.infnet.cryptoartsaleweb.model.exceptions.DataInvalidaException;
 
 import java.util.Date;
 import java.time.Instant;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa {
     private static final int MIN_CHAR_EM_NOME = 3; 
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     protected String nome;
     protected String email;
     protected String telefone;
-    protected Date aniversario;
+    protected String aniversario;
 
-    Pessoa(int id, String nome, String email, String telefone, Date aniversario) throws Exception {
-        setId(id);
+    Pessoa(){}
+    
+    Pessoa(String nome, String email, String telefone, String aniversario) throws Exception {
         setNome(nome);
         setEmail(email);
         setTelefone(telefone);
         setAniversario(aniversario);
     }
 
-    private void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    private void setNome(String nome) throws TamanhoCurtoException {
+    public void setNome(String nome) throws TamanhoCurtoException {
         if(nome.length() < MIN_CHAR_EM_NOME){
             throw new TamanhoCurtoException("O nome deve ter "+ MIN_CHAR_EM_NOME +" caracteres no mínimo.");
         }
@@ -35,35 +46,43 @@ public abstract class Pessoa {
         this.nome = nome;
     }
 
-    private void setEmail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    private void setTelefone(String telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
     
-    private void setAniversario(Date aniversario) throws DataInvalidaException {
-        if(aniversario.after(Date.from(Instant.now()))){
-            throw new DataInvalidaException("A data deve ser antes de hoje.");
-        }
+    public void setAniversario(String aniversario) {
+//        if(aniversario.after(Date.from(Instant.now()))){
+//            throw new DataInvalidaException("A data deve ser antes de hoje.");
+//        }
 
         this.aniversario = aniversario;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    private String getNome() {
+    public String getNome() {
         return this.nome;
+    }
+    
+    public String getEmail() {
+        return this.email;
+    }
+    
+    public String getTelefone() {
+        return this.telefone;
     }
 
     protected String getContato() {
         return this.email +  " - " + this.telefone;
     }
     
-    protected Date getAniversario() {
+    public String getAniversario() {
         return this.aniversario;
     }
 

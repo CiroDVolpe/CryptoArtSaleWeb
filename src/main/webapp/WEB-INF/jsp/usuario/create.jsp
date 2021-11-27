@@ -36,11 +36,7 @@
                     </div>
                 </div>
             
-                <c:if test="${not empty msg}">
-                    <div class="alert alert-warning" role="alert">
-                        <strong>Alerta!</strong> ${msg}
-                    </div>
-                </c:if>
+                <c:import url="/WEB-INF/jsp/alertas/alerta.jsp"/>
             </div>
         </div>
     </body>

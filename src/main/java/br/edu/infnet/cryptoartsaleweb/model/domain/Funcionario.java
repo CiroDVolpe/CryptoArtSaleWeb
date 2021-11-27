@@ -1,21 +1,27 @@
 package br.edu.infnet.cryptoartsaleweb.model.domain;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 
+@Entity
+@PrimaryKeyJoinColumn(name = "id")
 public class Funcionario extends Pessoa {
-    private int cod_trabalho;
+    private int codTrabalho;
 
-    public Funcionario(int id, String nome, String email, String telefone, Date aniversario, int cod_trabalho) throws Exception {
-        super(id, nome, email, telefone, aniversario);
-        setCodTrabalho(cod_trabalho);
+    public Funcionario() {}
+    
+    public Funcionario(String nome, String email, String telefone, String aniversario, int codTrabalho) throws Exception {
+        super(nome, email, telefone, aniversario);
+        setCodTrabalho(codTrabalho);
     }
 
-    private void setCodTrabalho(int cod_trabalho) {
-        this.cod_trabalho = cod_trabalho;
+    public void setCodTrabalho(int codTrabalho) {
+        this.codTrabalho = codTrabalho;
     }
 
-    private int getCodTrabalho() {
-        return this.cod_trabalho;
+    public int getCodTrabalho() {
+        return this.codTrabalho;
     }
 
     public void resumo() {

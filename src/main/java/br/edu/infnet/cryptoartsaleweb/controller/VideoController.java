@@ -7,61 +7,61 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import br.edu.infnet.cryptoartsaleweb.model.domain.Audio;
-import br.edu.infnet.cryptoartsaleweb.service.AudioService;
+import br.edu.infnet.cryptoartsaleweb.model.domain.Video;
+import br.edu.infnet.cryptoartsaleweb.service.VideoService;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class AudioController {
+public class VideoController {
 	
     @Autowired
-    private AudioService audioService;
+    private VideoService videoService;
 
-    @GetMapping(value = "/audio")
+    @GetMapping(value = "/video")
     public String telaCadastro(HttpSession session) {
         if(session.getAttribute("user") != null) {
-            return "audio/form";
+            return "video/form";
         }
 
         return "redirect:/login";
     }
 
-    @GetMapping(value = "/audio/list")
+    @GetMapping(value = "/video/list")
     public String telaLista(Model model, HttpSession session) {
         if(session.getAttribute("user") != null) {
-            model.addAttribute("listaAudios", audioService.obterLista());
+            model.addAttribute("listaVideos", videoService.obterLista());
 
-            return "audio/list";
+            return "video/list";
         }
 
         return "redirect:/login";
     }
 
-    @PostMapping(value = "/audio")
-    public String incluir(Model model, Audio audio, HttpSession session) {
+    @PostMapping(value = "/video")
+    public String incluir(Model model, Video video, HttpSession session) {
         if(session.getAttribute("user") != null) {
             try{
-                audioService.incluir(audio);
+                videoService.incluir(video);
 
-                model.addAttribute("nomeCriado", audio.getNome());
+                model.addAttribute("nomeCriado", video.getNome());
 
                 return telaLista(model, session);
             } catch(Exception e){
                 model.addAttribute("msg", e.getMessage());
-                return "audio";
-            }  
+                return "video";
+            } 
         }
 
         return "redirect:/login";
     }
 
-    @GetMapping(value = "/audio/{id}/excluir")
+    @GetMapping(value = "/video/{id}/excluir")
     public String excluir(Model model, HttpSession session, @PathVariable Integer id) {
         if(session.getAttribute("user") != null) {
-            Audio audio = audioService.buscaPorId(id);
-            model.addAttribute("nomeExcluido", audio.getNome());
+            Video video = videoService.buscaPorId(id);
+            model.addAttribute("nomeExcluido", video.getNome());
             
-            audioService.excluir(id);
+            videoService.excluir(id);
 
             return telaLista(model, session);
         }

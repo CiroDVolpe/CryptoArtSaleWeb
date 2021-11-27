@@ -22,6 +22,10 @@ public class AudioService {
         audioRepository.save(audio);
     }
     
+    public Audio incluirRetornando(Audio audio){
+        return audioRepository.save(audio);
+    }
+    
     public Audio buscaPorId(Integer id){
         return audioRepository.findById(id).orElse(null);
     }

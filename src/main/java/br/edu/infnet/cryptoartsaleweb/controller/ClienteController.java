@@ -7,61 +7,61 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import br.edu.infnet.cryptoartsaleweb.model.domain.Audio;
-import br.edu.infnet.cryptoartsaleweb.service.AudioService;
+import br.edu.infnet.cryptoartsaleweb.model.domain.Cliente;
+import br.edu.infnet.cryptoartsaleweb.service.ClienteService;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class AudioController {
+public class ClienteController {
 	
     @Autowired
-    private AudioService audioService;
+    private ClienteService clienteService;
 
-    @GetMapping(value = "/audio")
+    @GetMapping(value = "/cliente")
     public String telaCadastro(HttpSession session) {
         if(session.getAttribute("user") != null) {
-            return "audio/form";
+            return "cliente/form";
         }
 
         return "redirect:/login";
     }
 
-    @GetMapping(value = "/audio/list")
+    @GetMapping(value = "/cliente/list")
     public String telaLista(Model model, HttpSession session) {
         if(session.getAttribute("user") != null) {
-            model.addAttribute("listaAudios", audioService.obterLista());
+            model.addAttribute("listaClientes", clienteService.obterLista());
 
-            return "audio/list";
+            return "cliente/list";
         }
 
         return "redirect:/login";
     }
 
-    @PostMapping(value = "/audio")
-    public String incluir(Model model, Audio audio, HttpSession session) {
+    @PostMapping(value = "/cliente")
+    public String incluir(Model model, Cliente cliente, HttpSession session) {
         if(session.getAttribute("user") != null) {
             try{
-                audioService.incluir(audio);
+                clienteService.incluir(cliente);
 
-                model.addAttribute("nomeCriado", audio.getNome());
+                model.addAttribute("nomeCriado", cliente.getNome());
 
                 return telaLista(model, session);
             } catch(Exception e){
                 model.addAttribute("msg", e.getMessage());
-                return "audio";
+                return "cliente";
             }  
         }
 
         return "redirect:/login";
     }
 
-    @GetMapping(value = "/audio/{id}/excluir")
+    @GetMapping(value = "/cliente/{id}/excluir")
     public String excluir(Model model, HttpSession session, @PathVariable Integer id) {
         if(session.getAttribute("user") != null) {
-            Audio audio = audioService.buscaPorId(id);
-            model.addAttribute("nomeExcluido", audio.getNome());
+            Cliente cliente = clienteService.buscaPorId(id);
+            model.addAttribute("nomeExcluido", cliente.getNome());
             
-            audioService.excluir(id);
+            clienteService.excluir(id);
 
             return telaLista(model, session);
         }

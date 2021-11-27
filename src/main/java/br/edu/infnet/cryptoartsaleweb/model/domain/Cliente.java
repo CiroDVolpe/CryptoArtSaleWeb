@@ -1,11 +1,17 @@
 package br.edu.infnet.cryptoartsaleweb.model.domain;
 
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 
+@Entity
+@PrimaryKeyJoinColumn(name = "id")
 public class Cliente extends Pessoa {
 	
-    public Cliente(int id, String nome, String email, String telefone, Date aniversario) throws Exception {
-        super(id, nome, email, telefone, aniversario);
+    public Cliente() {}
+
+    public Cliente(String nome, String email, String telefone, String aniversario) throws Exception {
+        super(nome, email, telefone, aniversario);
     }
 
     public void resumo() {

@@ -28,6 +28,17 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
     }
     
+    public Usuario alterarSenha(Usuario usuarioTeste) {
+        Usuario usuario = usuarioRepository.identificacao(usuarioTeste.getEmail(), usuarioTeste.getNome());
+        
+        if(usuario != null){
+            usuario.setSenha(usuarioTeste.getSenha());
+            usuarioRepository.save(usuario);
+        }
+        
+        return usuario;
+    }
+    
     public List<Usuario> obterLista(){
         return (List<Usuario>) usuarioRepository.findAll();
     }
