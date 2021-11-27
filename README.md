@@ -6,8 +6,37 @@ Projeto incremental para a disciplina de Desenvolvimento Web com Java 💻 ☕
 - O banco iniciará limpo, porém é adicionado de maneira incremental, logo criar um usuário já funcionará para diversos testes.
 
 ### Documentação Rest
+A aplicação disponibiliza dois endpoints para integir via REST, sendo eles:
+###### GET /api/audio - Listar audios
+Esse método retornara uma lista em json dos audios cadastrados no sistema.
+Não exige body.
 
-### Link para aplicação REST que consome essa
+Exemplo de consumo:
+<img width="875" alt="Captura de Tela 2021-11-26 às 22 24 11" src="https://user-images.githubusercontent.com/28911035/143663916-de23d26a-f764-42e7-8a48-560d7112df77.png">
+
+###### POST /api/audio - Criar audio
+Esse método exige um body no formato de um audio em json e retorna o mesmo contendo o id cadastrado no sistema.
+Exemplo de body para cópia:
+`{
+	"nome": "Cri-cri-cri",
+	"formato": "mp3",
+	"tamanho": 123.0,
+	"nomeArtista": "Grilado",
+	"afinacao": "G e Am",
+	"genero": "Brasil House"
+}`
+
+Exemplo de consumo:
+<img width="856" alt="Captura de Tela 2021-11-26 às 22 27 00" src="https://user-images.githubusercontent.com/28911035/143664029-44c12e8f-a172-432f-88f5-4ead79d0a83f.png">
+
+### Link para aplicação REST que consome a api disposta acima
+https://github.com/CiroDVolpe/Consumer
+
+###### Imagens mostrando seu consumo
+Criação: <br>
+<img width="836" alt="Captura de Tela 2021-11-26 às 22 31 35" src="https://user-images.githubusercontent.com/28911035/143664101-56e63ac4-4fe9-4227-8215-a6bca896bb29.png"><br>
+Listagem: <br>
+<img width="862" alt="Captura de Tela 2021-11-26 às 22 31 44" src="https://user-images.githubusercontent.com/28911035/143664104-46782a85-09af-4195-a6f1-3bc0627456fd.png"><br>
 
 ## AUTO-AVALIAÇÕES
 ### Itens TP3
